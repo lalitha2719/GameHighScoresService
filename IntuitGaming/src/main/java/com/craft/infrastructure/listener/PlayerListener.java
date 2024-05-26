@@ -15,7 +15,7 @@ public class PlayerListener {
     @Autowired
     private GameService gameService;
 
-    @KafkaListener(topics = "player-topic", groupId = "my-group")
+    @KafkaListener(topics = "${kafka.topic.player-topic-name}", groupId = "${kafka.topic.group-id}")
     public void onMessage(ConsumerRecord<String, String> message) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         PlayerDetails playerDetails = mapper.readValue(message.value(), PlayerDetails.class);
